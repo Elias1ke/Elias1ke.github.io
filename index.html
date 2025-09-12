@@ -12,147 +12,138 @@
       --text: #222;
       --card-bg: #fff;
       --accent: #0d6efd;
+      --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
     }
     [data-theme="dark"] {
-      --bg: #121212;
+      --bg: #0f1116;
       --text: #f1f1f1;
-      --card-bg: #1e1e1e;
+      --card-bg: #1b1d23;
       --accent: #66b2ff;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      transition: background var(--transition), color var(--transition);
     }
 
     /* NAVIGATION */
     nav {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      background: var(--card-bg);
+      position: fixed; top: 0; left: 0; width: 100%;
       display: flex; justify-content: space-between; align-items: center;
-      padding: .8rem 1.2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       z-index: 1000;
+      transition: background var(--transition);
     }
+    [data-theme="dark"] nav { background: rgba(30,30,30,0.8); }
     nav .logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--accent);
+      font-weight: 700; font-size: 1.3rem; color: var(--accent);
+      letter-spacing: -0.5px;
     }
     nav ul {
-      list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;
+      display: flex; gap: 1.5rem; margin: 0; padding: 0; list-style: none;
     }
     nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: color .2s;
+      text-decoration: none; color: var(--text); font-weight: 500; position: relative;
     }
-    nav a:hover { color: var(--accent); }
+    nav a::after {
+      content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: var(--accent); transition: width 0.3s;
+    }
+    nav a:hover::after { width: 100%; }
 
     /* HAMBURGER */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .hamburger div {
-      width: 25px; height: 3px; background: var(--text);
-      transition: all .3s;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger div { width: 25px; height: 3px; background: var(--text); transition: var(--transition); }
 
     /* HEADER */
     header {
       text-align: center;
-      padding: 6rem 1rem 3rem;
-      background: var(--accent);
-      color: #fff;
+      padding: 8rem 1rem 5rem;
+      background: linear-gradient(120deg,var(--accent),#845ef7);
+      color: #fff; position: relative; overflow: hidden;
     }
-    header h1 { margin: 0; font-size: 2.8rem; }
-    header p { margin-top: .5rem; font-size: 1.2rem; }
+    header::after {
+      content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+      animation: floatBg 10s infinite alternate ease-in-out;
+    }
+    @keyframes floatBg { from {transform: translateY(0);} to {transform: translateY(-30px);} }
+    header h1 { margin: 0; font-size: 3rem; letter-spacing: -1px; animation: fadeDown 1s ease-out forwards; opacity:0; }
+    header p { margin-top: .8rem; font-size: 1.2rem; animation: fadeUp 1s 0.3s ease-out forwards; opacity:0; }
+    @keyframes fadeDown { from{opacity:0; transform: translateY(-30px);} to{opacity:1; transform: translateY(0);} }
+    @keyframes fadeUp { from{opacity:0; transform: translateY(30px);} to{opacity:1; transform: translateY(0);} }
+
+    .cta-btn {
+      display:inline-block; margin-top:2rem; background:#fff; color:var(--accent);
+      padding:0.9rem 1.5rem; border-radius:30px; text-decoration:none; font-weight:600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .cta-btn:hover { background:#f1f1f1; transform: translateY(-3px); }
 
     #theme-toggle {
-      position: fixed;
-      top: 1rem; right: 1rem;
-      background: #fff; color: var(--accent);
+      position: fixed; top: 1rem; right: 1rem;
+      background: var(--card-bg); color: var(--accent);
       border: none; border-radius: 20px;
       padding: .5rem 1rem; cursor: pointer;
       font-weight: 600; z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: background var(--transition), color var(--transition);
     }
 
     /* SECTIONS */
     .section {
-      max-width: 950px;
-      margin: 3rem auto;
-      padding: 0 1rem;
+      max-width: 1000px; margin: 5rem auto; padding: 0 1.2rem;
     }
     h2 {
       border-bottom: 3px solid var(--accent);
-      display: inline-block;
-      margin-bottom: 1rem;
-      padding-bottom: .3rem;
+      display: inline-block; margin-bottom: 2rem; padding-bottom: .3rem;
     }
 
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+      gap: 1.5rem;
     }
     .skill {
-      background: var(--card-bg);
-      border-radius: 10px;
-      padding: .8rem 1rem;
-      text-align: center;
+      background: var(--card-bg); border-radius: 12px;
+      padding: 1rem 1.2rem; text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform var(--transition), box-shadow var(--transition);
+      opacity: 0; transform: translateY(40px);
     }
+    .skill.visible { opacity: 1; transform: translateY(0); }
+    .skill:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-    .project-card {
+    .project-card, .exp-card {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      opacity: 0; transform: translateY(40px);
+      transition: transform var(--transition), opacity var(--transition);
     }
-    .project-card img {
-      width: 100%; border-radius: 8px; margin-bottom: .8rem;
-    }
+    .project-card.visible, .exp-card.visible { opacity: 1; transform: translateY(0); }
+    .project-card img { width: 100%; border-radius: 8px; margin-bottom: 1rem; }
     .project-card h3 { margin-top: 0; color: var(--accent); }
 
-    .exp-card {
-      background: var(--card-bg);
-      border-left: 5px solid var(--accent);
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
     footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--accent);
-      color: #fff;
-      margin-top: 4rem;
+      text-align: center; padding: 2.5rem;
+      background: var(--accent); color: #fff; margin-top: 5rem;
     }
 
-    /* MOBILE RESPONSIVE */
+    /* MOBILE */
     @media (max-width: 768px) {
       nav ul {
-        display: none;
-        position: absolute;
-        top: 60px; right: 0;
-        background: var(--card-bg);
-        flex-direction: column;
-        width: 200px;
-        padding: 1rem;
+        display: none; position: absolute; top: 60px; right: 0;
+        background: var(--card-bg); flex-direction: column; width: 200px;
+        padding: 1rem; border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       }
       nav ul.open { display: flex; }
@@ -162,7 +153,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav>
     <div class="logo">EK</div>
     <ul>
@@ -171,9 +161,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="hamburger">
-      <div></div><div></div><div></div>
-    </div>
+    <div class="hamburger"><div></div><div></div><div></div></div>
   </nav>
 
   <button id="theme-toggle">🌙 Dark Mode</button>
@@ -181,57 +169,58 @@
   <header>
     <h1>Elias Irungu Kariuki</h1>
     <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
+    <a href="#projects" class="cta-btn">See My Work</a>
   </header>
 
   <main>
-  <section id="skills" class="section">
-    <h2>🧩 Core Skills</h2>
-    <div class="skills-grid">
-      <div class="skill">SQL</div>
-      <div class="skill">Python (Pandas, NumPy, SciPy, Matplotlib)</div>
-      <div class="skill">Power BI</div>
-      <div class="skill">Tableau</div>
-      <div class="skill">Excel</div>
-      <div class="skill">PySpark</div>
-      <div class="skill">BigQuery</div>
-      <div class="skill">Looker</div>
-    </div>
-  </section>
+    <section id="skills" class="section">
+      <h2>🧩 Core Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">SQL</div>
+        <div class="skill">Python (Pandas, NumPy, SciPy)</div>
+        <div class="skill">Power BI</div>
+        <div class="skill">Tableau</div>
+        <div class="skill">Excel</div>
+        <div class="skill">PySpark</div>
+        <div class="skill">BigQuery</div>
+        <div class="skill">Looker</div>
+      </div>
+    </section>
 
-  <section id="projects" class="section">
-    <h2>📊 Featured Projects</h2>
-    <div class="project-card">
-      <img src="project1.jpg" alt="Maize Market Dashboard">
-      <h3>Maize Market Case Study – Kenya</h3>
-      <p>Python • Excel • Power BI</p>
-      <ul><li>Analyzed Kenya’s maize market trends, price, and productivity</li></ul>
-    </div>
-    <div class="project-card">
-      <img src="project2.jpg" alt="Fitlife Dashboard">
-      <h3>Fitlife Dashboards and Reports</h3>
-      <p>Python (Django) • SQL • MySQL</p>
-      <ul><li>Created fitness recommender system with real-time data</li></ul>
-    </div>
-  </section>
+    <section id="projects" class="section">
+      <h2>📊 Featured Projects</h2>
+      <div class="project-card">
+        <img src="project1.jpg" alt="Maize Market Dashboard">
+        <h3>Maize Market Case Study – Kenya</h3>
+        <p>Python • Excel • Power BI</p>
+        <ul><li>Analyzed Kenya’s maize market trends, price, and productivity</li></ul>
+      </div>
+      <div class="project-card">
+        <img src="project2.jpg" alt="Fitlife Dashboard">
+        <h3>Fitlife Dashboards and Reports</h3>
+        <p>Python (Django) • SQL • MySQL</p>
+        <ul><li>Created fitness recommender system with real-time data</li></ul>
+      </div>
+    </section>
 
-  <section id="experience" class="section">
-    <h2>💼 Experience</h2>
-    <div class="exp-card">
-      <h3>Data Analyst Consultant | Jan 2024 – Aug 2025</h3>
-      <ul><li>Automated Excel workbooks and built VBA macros</li></ul>
-    </div>
-    <div class="exp-card">
-      <h3>Data Analytics Intern — Deloitte Australia | Jan 2023 – Jul 2023</h3>
-      <ul><li>Built Tableau dashboards for financial anomaly detection</li></ul>
-    </div>
-  </section>
+    <section id="experience" class="section">
+      <h2>💼 Experience</h2>
+      <div class="exp-card">
+        <h3>Data Analyst Consultant | Jan 2024 – Aug 2025</h3>
+        <ul><li>Automated Excel workbooks and built VBA macros</li></ul>
+      </div>
+      <div class="exp-card">
+        <h3>Data Analytics Intern — Deloitte Australia | Jan 2023 – Jul 2023</h3>
+        <ul><li>Built Tableau dashboards for financial anomaly detection</li></ul>
+      </div>
+    </section>
 
-  <section id="contact" class="section">
-    <h2>📫 Contact</h2>
-    <p>Email: <a href="mailto:eliasirungu001@gmail.com">eliasirungu001@gmail.com</a></p>
-    <p>LinkedIn: <a href="#">linkedin.com/in/elias-kariuki</a></p>
-    <p>GitHub: <a href="#">github.com/elias1ke</a></p>
-  </section>
+    <section id="contact" class="section">
+      <h2>📫 Contact</h2>
+      <p>Email: <a href="mailto:eliasirungu001@gmail.com">eliasirungu001@gmail.com</a></p>
+      <p>LinkedIn: <a href="#">linkedin.com/in/elias-kariuki</a></p>
+      <p>GitHub: <a href="#">github.com/elias1ke</a></p>
+    </section>
   </main>
 
   <footer>
@@ -249,9 +238,15 @@
     // Hamburger menu
     const burger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('nav ul');
-    burger.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-    });
+    burger.addEventListener('click', () => navMenu.classList.toggle('open'));
+
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.skill, .project-card, .exp-card').forEach(el => observer.observe(el));
   </script>
 
 </body>
