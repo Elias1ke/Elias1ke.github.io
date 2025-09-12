@@ -35,90 +35,92 @@
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(255,255,255,0.85);
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.8);
       backdrop-filter: blur(10px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       z-index: 1000;
+      transition: background var(--transition);
     }
-    [data-theme="dark"] nav { background: rgba(20,20,20,0.8); }
+    [data-theme="dark"] nav { background: rgba(30,30,30,0.8); }
     nav .logo {
-      font-weight: 700; font-size: 1.4rem; color: var(--accent);
-      letter-spacing: -0.5px; cursor: pointer;
-      transition: transform 0.3s ease;
+      font-weight: 700; font-size: 1.3rem; color: var(--accent);
+      letter-spacing: -0.5px;
     }
-    nav .logo:hover { transform: scale(1.1); }
-
     nav ul {
-      display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none;
-      align-items: center;
+      display: flex; gap: 1.5rem; margin: 0; padding: 0; list-style: none;
     }
     nav a {
       text-decoration: none; color: var(--text); font-weight: 500; position: relative;
-      transition: color 0.3s;
+      transition: color var(--transition);
     }
     nav a::after {
       content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-      background: var(--accent); transition: width 0.3s ease;
+      background: var(--accent); transition: width 0.3s;
     }
     nav a:hover::after { width: 100%; }
+    nav a:hover { color: var(--accent); }
 
-    #theme-toggle {
-      background: var(--card-bg);
-      color: var(--accent);
-      border: none; border-radius: 20px;
-      padding: .5rem 1rem; cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      transition: background var(--transition), color var(--transition), transform 0.3s;
-    }
-    #theme-toggle:hover { transform: translateY(-2px); }
+    /* HAMBURGER */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger div { width: 25px; height: 3px; background: var(--text); transition: var(--transition); }
 
     /* HEADER */
     header {
       text-align: center;
-      padding: 10rem 1rem 6rem;
+      padding: 9rem 1rem 6rem;
       background: linear-gradient(120deg,var(--accent),#845ef7);
       color: #fff; position: relative; overflow: hidden;
     }
     header::after {
-      content:""; position:absolute; inset:0; 
-      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
-      animation: floatBg 8s infinite alternate ease-in-out;
+      content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+      animation: floatBg 10s infinite alternate ease-in-out;
     }
     @keyframes floatBg { from {transform: translateY(0);} to {transform: translateY(-30px);} }
-    header h1 {
-      margin: 0; font-size: 3.5rem; letter-spacing: -1px;
-      animation: fadeDown 1s ease-out forwards; opacity:0;
-    }
-    header p {
-      margin-top: .8rem; font-size: 1.3rem;
-      animation: fadeUp 1s 0.3s ease-out forwards; opacity:0;
-    }
+    header h1 { margin: 0; font-size: 3.3rem; letter-spacing: -1px; animation: fadeDown 1s ease-out forwards; opacity:0; }
+    header p { margin-top: .8rem; font-size: 1.2rem; animation: fadeUp 1s 0.3s ease-out forwards; opacity:0; }
     @keyframes fadeDown { from{opacity:0; transform: translateY(-30px);} to{opacity:1; transform: translateY(0);} }
     @keyframes fadeUp { from{opacity:0; transform: translateY(30px);} to{opacity:1; transform: translateY(0);} }
 
     .cta-btn {
       display:inline-block; margin-top:2.5rem; background:#fff; color:var(--accent);
-      padding:1rem 1.8rem; border-radius:30px; text-decoration:none; font-weight:600;
+      padding:1rem 1.7rem; border-radius:40px; text-decoration:none; font-weight:600;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: background var(--transition), transform var(--transition);
-      animation: fadeUp 1s 0.6s ease-out forwards; opacity:0;
+      animation: fadeUp 1.3s 0.5s ease-out forwards; opacity:0;
     }
-    .cta-btn:hover { background:#f1f1f1; transform: translateY(-4px) scale(1.03); }
+    .cta-btn:hover { background:#f1f1f1; transform: translateY(-3px) scale(1.02); }
 
-    /* SECTION STYLES */
+    /* theme toggle repositioned */
+    #theme-toggle {
+      position: fixed; 
+      top: 1rem;   
+      right: 1rem;
+      background: var(--card-bg); 
+      color: var(--accent);
+      border: none; border-radius: 30px;
+      padding: .6rem 1.1rem; cursor: pointer;
+      font-weight: 600; z-index: 1500;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+    #theme-toggle:hover { transform: scale(1.05); }
+
+    /* SECTIONS */
     .section {
-      max-width: 1000px; margin: 6rem auto; padding: 0 1.5rem;
-      opacity: 0; transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      max-width: 1000px; margin: 6rem auto; padding: 0 1.2rem;
+      opacity: 0; transform: translateY(40px);
+      animation: fadeSection 1s ease forwards;
     }
-    .section.visible { opacity: 1; transform: translateY(0); }
-
+    .section:nth-of-type(odd) { animation-delay: .2s; }
+    .section:nth-of-type(even) { animation-delay: .4s; }
+    @keyframes fadeSection {
+      from{opacity:0; transform: translateY(40px);}
+      to{opacity:1; transform: translateY(0);}
+    }
     h2 {
       border-bottom: 3px solid var(--accent);
       display: inline-block; margin-bottom: 2rem; padding-bottom: .3rem;
-      font-size: 2rem;
     }
 
     .skills-grid {
@@ -126,32 +128,22 @@
       gap: 1.5rem;
     }
     .skill {
-      background: var(--card-bg); border-radius: 14px;
-      padding: 1.2rem 1.4rem; text-align: center;
+      background: var(--card-bg); border-radius: 12px;
+      padding: 1rem 1.2rem; text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      opacity: 0; transform: translateY(40px);
-      transition: transform var(--transition), box-shadow var(--transition), opacity 0.6s ease;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    .skill.visible { opacity: 1; transform: translateY(0); }
-    .skill:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    }
+    .skill:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
     .project-card, .exp-card {
       background: var(--card-bg);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 1.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      opacity: 0; transform: translateY(40px);
-      transition: transform var(--transition), box-shadow var(--transition), opacity 0.6s ease;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    .project-card.visible, .exp-card.visible { opacity: 1; transform: translateY(0); }
-    .project-card:hover, .exp-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    }
+    .project-card:hover, .exp-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
     .project-card img { width: 100%; border-radius: 8px; margin-bottom: 1rem; }
     .project-card h3 { margin-top: 0; color: var(--accent); }
 
@@ -169,24 +161,24 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       }
       nav ul.open { display: flex; }
-      .hamburger { display: flex; flex-direction: column; gap: 5px; }
-      #theme-toggle { margin-top: 1rem; }
+      .hamburger { display: flex; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">EK</div>
+    <div class="logo">EK</div>
     <ul>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><button id="theme-toggle">🌙 Dark</button></li>
     </ul>
     <div class="hamburger"><div></div><div></div><div></div></div>
   </nav>
+
+  <button id="theme-toggle">🌙 Dark Mode</button>
 
   <header>
     <h1>Elias Irungu Kariuki</h1>
@@ -199,28 +191,41 @@
       <h2>🧩 Core Skills</h2>
       <div class="skills-grid">
         <div class="skill">SQL</div>
-        <div class="skill">Python</div>
+        <div class="skill">Python (Pandas, NumPy, SciPy)</div>
         <div class="skill">Power BI</div>
         <div class="skill">Tableau</div>
         <div class="skill">Excel</div>
         <div class="skill">PySpark</div>
+        <div class="skill">BigQuery</div>
+        <div class="skill">Looker</div>
       </div>
     </section>
 
     <section id="projects" class="section">
-      <h2>📊 Projects</h2>
+      <h2>📊 Featured Projects</h2>
       <div class="project-card">
         <img src="project1.jpg" alt="Maize Market Dashboard">
-        <h3>Maize Market Case Study</h3>
-        <p>Analyzed Kenya’s maize market trends, price, and productivity.</p>
+        <h3>Maize Market Case Study – Kenya</h3>
+        <p>Python • Excel • Power BI</p>
+        <ul><li>Analyzed Kenya’s maize market trends, price, and productivity</li></ul>
+      </div>
+      <div class="project-card">
+        <img src="project2.jpg" alt="Fitlife Dashboard">
+        <h3>Fitlife Dashboards and Reports</h3>
+        <p>Python (Django) • SQL • MySQL</p>
+        <ul><li>Created fitness recommender system with real-time data</li></ul>
       </div>
     </section>
 
     <section id="experience" class="section">
       <h2>💼 Experience</h2>
       <div class="exp-card">
-        <h3>Data Analyst Consultant | 2024–2025</h3>
+        <h3>Data Analyst Consultant | Jan 2024 – Aug 2025</h3>
         <ul><li>Automated Excel workbooks and built VBA macros</li></ul>
+      </div>
+      <div class="exp-card">
+        <h3>Data Analytics Intern — Deloitte Australia | Jan 2023 – Jul 2023</h3>
+        <ul><li>Built Tableau dashboards for financial anomaly detection</li></ul>
       </div>
     </section>
 
@@ -237,11 +242,11 @@
   </footer>
 
   <script>
-    // Dark mode toggle
+    // Dark mode
     const toggle = document.getElementById('theme-toggle');
     toggle.addEventListener('click', () => {
       document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-      toggle.textContent = document.body.dataset.theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      toggle.textContent = document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
 
     // Hamburger menu
@@ -249,16 +254,15 @@
     const navMenu = document.querySelector('nav ul');
     burger.addEventListener('click', () => navMenu.classList.toggle('open'));
 
-    // Scroll animations
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
+    // Smooth scroll for nav + See My Work
+    document.querySelectorAll('nav a, #see-work-btn').forEach(link=>{
+      link.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
       });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.section, .skill, .project-card, .exp-card')
-      .forEach(el => observer.observe(el));
+    });
   </script>
 
 </body>
 </html>
+
