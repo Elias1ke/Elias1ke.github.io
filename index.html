@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Elias Kariuki | Senior Data Analyst</title>
+  <meta name="description" content="Senior Data Analyst portfolio of Elias Kariuki — showcasing data projects, dashboards, and analytics experience.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -19,31 +20,75 @@
       --accent: #66b2ff;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Inter', sans-serif;
-      margin: 0; padding: 0;
-      background: var(--bg); color: var(--text);
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
       transition: background 0.3s, color 0.3s;
     }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--card-bg);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .8rem 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    nav ul {
+      list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px; height: 3px; background: var(--text);
+      transition: all .3s;
+    }
+
+    /* HEADER */
     header {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 6rem 1rem 3rem;
       background: var(--accent);
       color: #fff;
-      position: relative;
     }
     header h1 { margin: 0; font-size: 2.8rem; }
     header p { margin-top: .5rem; font-size: 1.2rem; }
 
     #theme-toggle {
-      position: absolute;
+      position: fixed;
       top: 1rem; right: 1rem;
       background: #fff; color: var(--accent);
       border: none; border-radius: 20px;
       padding: .5rem 1rem; cursor: pointer;
-      font-weight: 600;
+      font-weight: 600; z-index: 1001;
     }
 
+    /* SECTIONS */
     .section {
       max-width: 950px;
       margin: 3rem auto;
@@ -79,16 +124,7 @@
     .project-card img {
       width: 100%; border-radius: 8px; margin-bottom: .8rem;
     }
-    .project-card h3 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-    .links a {
-      display: inline-block;
-      margin-right: 1rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .project-card h3 { margin-top: 0; color: var(--accent); }
 
     .exp-card {
       background: var(--card-bg);
@@ -106,111 +142,115 @@
       color: #fff;
       margin-top: 4rem;
     }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 60px; right: 0;
+        background: var(--card-bg);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      nav ul.open { display: flex; }
+      .hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">EK</div>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger">
+      <div></div><div></div><div></div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle">🌙 Dark Mode</button>
+
   <header>
-    <button id="theme-toggle">🌙 Dark Mode</button>
     <h1>Elias Irungu Kariuki</h1>
     <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
   </header>
 
-  <section class="section">
+  <main>
+  <section id="skills" class="section">
     <h2>🧩 Core Skills</h2>
     <div class="skills-grid">
       <div class="skill">SQL</div>
       <div class="skill">Python (Pandas, NumPy, SciPy, Matplotlib)</div>
       <div class="skill">Power BI</div>
       <div class="skill">Tableau</div>
-      <div class="skill">Excel (VLookup, Pivot Tables)</div>
+      <div class="skill">Excel</div>
       <div class="skill">PySpark</div>
       <div class="skill">BigQuery</div>
       <div class="skill">Looker</div>
-      <div class="skill">VBA Automation</div>
     </div>
   </section>
 
-  <section class="section">
+  <section id="projects" class="section">
     <h2>📊 Featured Projects</h2>
-
     <div class="project-card">
       <img src="project1.jpg" alt="Maize Market Dashboard">
       <h3>Maize Market Case Study – Kenya</h3>
       <p>Python • Excel • Power BI</p>
-      <ul>
-        <li>Analyzed Kenya’s maize market trends (supply, demand, price, productivity)</li>
-        <li>Cleaned and merged public datasets, built dashboards, and delivered policy insights</li>
-      </ul>
-      <div class="links">
-        <a href="#">🔗 GitHub Repo</a>
-        <a href="#">📊 Power BI Dashboard</a>
-      </div>
+      <ul><li>Analyzed Kenya’s maize market trends, price, and productivity</li></ul>
     </div>
-
     <div class="project-card">
       <img src="project2.jpg" alt="Fitlife Dashboard">
       <h3>Fitlife Dashboards and Reports</h3>
       <p>Python (Django) • SQL • MySQL</p>
-      <ul>
-        <li>Built data logic and dashboards for a personalized fitness & nutrition app</li>
-        <li>Created recommender system using real-time nutrition data</li>
-      </ul>
-      <div class="links">
-        <a href="#">🔗 GitHub Repo</a>
-      </div>
+      <ul><li>Created fitness recommender system with real-time data</li></ul>
     </div>
-
-    <div class="project-card">
-      <img src="project3.jpg" alt="Social Media Analysis">
-      <h3>Social Media Time-Wasters Report</h3>
-      <p>Python • Power BI</p>
-      <ul>
-        <li>Analyzed time-wasting patterns across TikTok, Instagram, and others</li>
-        <li>Recommended targeted content strategies based on peak usage and user groups</li>
-      </ul>
-      <div class="links">
-        <a href="#">🔗 GitHub Repo</a>
-      </div>
-    </div>
-
   </section>
 
-  <section class="section">
+  <section id="experience" class="section">
     <h2>💼 Experience</h2>
     <div class="exp-card">
-      <h3>Data Analyst Consultant <span style="font-weight:400;">| Jan 2024 – Aug 2025</span></h3>
-      <ul>
-        <li>Automated Excel workbooks and built VBA macros for engineers</li>
-        <li>Implemented hierarchy-based aggregations, Gantt charts, and error handling</li>
-      </ul>
+      <h3>Data Analyst Consultant | Jan 2024 – Aug 2025</h3>
+      <ul><li>Automated Excel workbooks and built VBA macros</li></ul>
     </div>
-
     <div class="exp-card">
-      <h3>Data Analytics Intern — Deloitte Australia <span style="font-weight:400;">| Jan 2023 – Jul 2023</span></h3>
-      <ul>
-        <li>Built Tableau dashboard to detect anomalies in financial transactions</li>
-        <li>Produced insights aligned with Deloitte’s forensic analytics framework</li>
-      </ul>
+      <h3>Data Analytics Intern — Deloitte Australia | Jan 2023 – Jul 2023</h3>
+      <ul><li>Built Tableau dashboards for financial anomaly detection</li></ul>
     </div>
   </section>
 
-  <section class="section">
+  <section id="contact" class="section">
     <h2>📫 Contact</h2>
     <p>Email: <a href="mailto:eliasirungu001@gmail.com">eliasirungu001@gmail.com</a></p>
     <p>LinkedIn: <a href="#">linkedin.com/in/elias-kariuki</a></p>
     <p>GitHub: <a href="#">github.com/elias1ke</a></p>
   </section>
+  </main>
 
   <footer>
     © 2025 Elias Kariuki — Senior Data Analyst Portfolio
   </footer>
 
   <script>
+    // Dark mode
     const toggle = document.getElementById('theme-toggle');
     toggle.addEventListener('click', () => {
       document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
       toggle.textContent = document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+
+    // Hamburger menu
+    const burger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('nav ul');
+    burger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
     });
   </script>
 
