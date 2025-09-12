@@ -96,7 +96,9 @@
     .modal-content{
       background:var(--card-bg);padding:2rem;border-radius:14px;
       max-width:600px;width:90%;color:var(--text);position:relative;
+      animation:fadeUp .3s ease;
     }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     .modal-content img{width:100%;border-radius:10px;margin-bottom:1rem;object-fit:cover;height:300px}
     .close-btn{
       position:absolute;top:.8rem;right:1rem;font-size:1.6rem;border:none;
@@ -204,19 +206,24 @@
   </div>
 
   <script>
+    // Dark mode toggle
     document.getElementById('theme-toggle').addEventListener('click', () => {
       document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
       document.getElementById('theme-toggle').textContent =
         document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
+
+    // Hamburger nav toggle
     document.querySelector('.hamburger').addEventListener('click', () => {
       document.querySelector('nav ul').classList.toggle('open');
     });
 
+    // Modal logic for all cards
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
+
     document.querySelectorAll('.project-card,.cert-card').forEach(card=>{
       card.addEventListener('click',()=>{
         modalImg.src = card.dataset.img;
@@ -225,6 +232,7 @@
         modal.classList.add('active');
       });
     });
+
     document.querySelector('.close-btn').addEventListener('click',()=>modal.classList.remove('active'));
     modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('active')});
   </script>
