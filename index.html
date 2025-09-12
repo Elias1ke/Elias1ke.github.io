@@ -239,56 +239,73 @@
   </div>
 
   <script>
-    // Theme
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.getElementById('theme-toggle').textContent =
-        document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+  // Theme
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.getElementById('theme-toggle').textContent =
+      document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+  // Hamburger
+  document.querySelector('.hamburger').addEventListener('click', () => {
+    document.querySelector('nav ul').classList.toggle('open');
+  });
+
+  // Modal logic
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+
+  let galleryImages = [];
+  let currentIndex = 0;
+
+  function showImage(index) {
+    modalImg.src = galleryImages[index];
+  }
+
+  document.querySelectorAll('.project-card,.cert-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      galleryImages = card.dataset.images.split(',');
+      currentIndex = 0;
+      showImage(currentIndex);
+      modalTitle.textContent = card.dataset.title;
+      modalDesc.textContent = card.dataset.desc;
+      modal.classList.add('active');
     });
-    // Hamburger
-    document.querySelector('.hamburger').addEventListener('click', () => {
-      document.querySelector('nav ul').classList.toggle('open');
-    });
+  });
 
-    // Modal logic
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+  prevBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    showImage(currentIndex);
+  });
+  nextBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    showImage(currentIndex);
+  });
 
-    let galleryImages = [];
-    let currentIndex = 0;
+  document.querySelector('.close-btn').addEventListener('click',()=>modal.classList.remove('active'));
+  modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('active')});
 
-    function showImage(index) {
-      modalImg.src = galleryImages[index];
-    }
-
-    document.querySelectorAll('.project-card,.cert-card').forEach(card=>{
-      card.addEventListener('click',()=>{
-        galleryImages = card.dataset.images.split(',');
-        currentIndex = 0;
-        showImage(currentIndex);
-        modalTitle.textContent = card.dataset.title;
-        modalDesc.textContent = card.dataset.desc;
-        modal.classList.add('active');
-      });
-    });
-
-    prevBtn.addEventListener('click', e => {
-      e.stopPropagation();
+  // 🔥 Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if(!modal.classList.contains('active')) return;
+    if(e.key === 'ArrowLeft') {
       currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
       showImage(currentIndex);
-    });
-    nextBtn.addEventListener('click', e => {
-      e.stopPropagation();
+    }
+    if(e.key === 'ArrowRight') {
       currentIndex = (currentIndex + 1) % galleryImages.length;
       showImage(currentIndex);
-    });
+    }
+    if(e.key === 'Escape') {
+      modal.classList.remove('active');
+    }
+  });
+</script>
 
-    document.querySelector('.close-btn').addEventListener('click',()=>modal.classList.remove('active'));
-    modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('active')});
-  </script>
 </body>
 </html>
