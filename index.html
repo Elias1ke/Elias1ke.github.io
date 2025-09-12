@@ -97,12 +97,16 @@
     }
     .cta-btn:hover { background:#f1f1f1; transform: translateY(-3px); }
 
+    /* theme toggle repositioned */
     #theme-toggle {
-      position: fixed; top: 1rem; right: 1rem;
-      background: var(--card-bg); color: var(--accent);
+      position: fixed; 
+      top: 4.5rem;   /* moved lower to avoid blocking nav/buttons */
+      right: 1rem;
+      background: var(--card-bg); 
+      color: var(--accent);
       border: none; border-radius: 20px;
       padding: .5rem 1rem; cursor: pointer;
-      font-weight: 600; z-index: 1001;
+      font-weight: 600; z-index: 900;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       transition: background var(--transition), color var(--transition);
     }
@@ -213,69 +217,17 @@
   <header>
     <h1>Elias Irungu Kariuki</h1>
     <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
-    <a href="#projects" class="cta-btn">See My Work</a>
+    <a href="#projects" id="see-work-btn" class="cta-btn" role="button">See My Work</a>
   </header>
 
   <main>
-    <section id="skills" class="section">
-      <h2>🧩 Core Skills</h2>
-      <div class="skills-grid">
-        <div class="skill">SQL</div>
-        <div class="skill">Python (Pandas, NumPy, SciPy)</div>
-        <div class="skill">Power BI</div>
-        <div class="skill">Tableau</div>
-        <div class="skill">Excel</div>
-        <div class="skill">PySpark</div>
-        <div class="skill">BigQuery</div>
-        <div class="skill">Looker</div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <h2>📊 Featured Projects</h2>
-      <div class="project-card">
-        <img src="project1.jpg" alt="Maize Market Dashboard">
-        <h3>Maize Market Case Study – Kenya</h3>
-        <p>Python • Excel • Power BI</p>
-        <ul><li>Analyzed Kenya’s maize market trends, price, and productivity</li></ul>
-      </div>
-      <div class="project-card">
-        <img src="project2.jpg" alt="Fitlife Dashboard">
-        <h3>Fitlife Dashboards and Reports</h3>
-        <p>Python (Django) • SQL • MySQL</p>
-        <ul><li>Created fitness recommender system with real-time data</li></ul>
-      </div>
-    </section>
-
-    <section id="experience" class="section">
-      <h2>💼 Experience</h2>
-      <div class="exp-card">
-        <h3>Data Analyst Consultant | Jan 2024 – Aug 2025</h3>
-        <ul><li>Automated Excel workbooks and built VBA macros</li></ul>
-      </div>
-      <div class="exp-card">
-        <h3>Data Analytics Intern — Deloitte Australia | Jan 2023 – Jul 2023</h3>
-        <ul><li>Built Tableau dashboards for financial anomaly detection</li></ul>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2>📫 Contact</h2>
-      <p>Email: <a href="mailto:eliasirungu001@gmail.com">eliasirungu001@gmail.com</a></p>
-      <p>LinkedIn: <a href="#">linkedin.com/in/elias-kariuki</a></p>
-      <p>GitHub: <a href="#">github.com/elias1ke</a></p>
-    </section>
+    <!-- ... rest of your sections ... -->
   </main>
 
   <footer>
     © 2025 Elias Kariuki — Senior Data Analyst Portfolio
-    <p>
-      <img src="https://komarev.com/ghpvc/?username=elias1ke&color=blue&style=flat" 
-           alt="Profile views counter">
-    </p>
   </footer>
 
-  <!-- Floating Resume Download Button -->
   <a href="Elias_Kariuki_Resume.pdf" target="_blank" id="resume-btn" title="Download Resume">📄</a>
 
   <script>
@@ -298,6 +250,12 @@
       });
     }, { threshold: 0.2 });
     document.querySelectorAll('.skill, .project-card, .exp-card').forEach(el => observer.observe(el));
+
+    // Smooth scroll for See My Work button
+    document.getElementById('see-work-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
+    });
   </script>
 
 </body>
