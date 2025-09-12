@@ -6,95 +6,92 @@
 <title>Elias Kariuki | Senior Data Analyst</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
 <style>
-  :root {
-    --bg: #f0f2f5;
-    --text: #222;
-    --card-bg: #ffffffee;
-    --accent: #0d6efd;
-    --contact-bg: #dbe0e6cc;
-  }
-  [data-theme="dark"] {
-    --bg: #0f1116;
-    --text: #f1f1f1;
-    --card-bg: #1b1d23ee;
-    --contact-bg: #121418ee;
-    --accent: #66b2ff;
-  }
-  html,body{
-    margin:0;overflow-x:hidden;scroll-behavior:smooth;
-    font-family:'Inter',sans-serif;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-      url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=60') center/cover fixed;
-    color:var(--text);
-  }
-  nav{
-    position:fixed;top:0;left:0;width:100%;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:1rem 1.5rem;background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(10px);z-index:1000
-  }
-  [data-theme="dark"] nav{background:rgba(30,30,30,0.9);}
-  nav .logo{font-weight:700;font-size:1.3rem;color:var(--accent);}
-  nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;}
-  nav a{text-decoration:none;color:var(--text);font-weight:500;}
+:root {
+  --bg: #f0f2f5;
+  --text: #222;
+  --card-bg: #ffffffee;
+  --accent: #0d6efd;
+  --contact-bg: #dbe0e6cc;
+}
+[data-theme="dark"] {
+  --bg: #0f1116;
+  --text: #f1f1f1;
+  --card-bg: #1b1d23ee;
+  --contact-bg: #121418ee;
+  --accent: #66b2ff;
+}
+html,body{
+  margin:0;overflow-x:hidden;scroll-behavior:smooth;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=60') center/cover fixed;
+  color:var(--text);
+}
+nav{
+  position:fixed;top:0;left:0;width:100%;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 1.5rem;background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(10px);z-index:1000
+}
+[data-theme="dark"] nav{background:rgba(30,30,30,0.9);}
+nav .logo{font-weight:700;font-size:1.3rem;color:var(--accent);}
+nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;}
+nav a{text-decoration:none;color:var(--text);font-weight:500;}
 
-  header{
-    text-align:center;padding:9rem 1rem 6rem;
-    background:linear-gradient(-45deg,var(--accent),#845ef7,#3bc9db,#ff922b);
-    background-size:300% 300%;color:#fff;animation:gradientBG 10s ease infinite
-  }
-  @keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  .cta-btn{
-    display:inline-block;margin-top:2rem;background:#fff;color:var(--accent);
-    padding:0.9rem 1.5rem;border-radius:30px;text-decoration:none;font-weight:600;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:0.3s;
-  }
-  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,0.2)}
+header{
+  text-align:center;padding:9rem 1rem 6rem;
+  background:linear-gradient(-45deg,var(--accent),#845ef7,#3bc9db,#ff922b);
+  background-size:300% 300%;color:#fff;animation:gradientBG 10s ease infinite
+}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.cta-btn{
+  display:inline-block;margin-top:2rem;background:#fff;color:var(--accent);
+  padding:0.9rem 1.5rem;border-radius:30px;text-decoration:none;font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:0.3s;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,0.2)}
 
-  .section{max-width:1100px;margin:5rem auto;padding:0 1.2rem}
-  h2{border-bottom:3px solid var(--accent);display:inline-block;margin-bottom:2rem;color:#fff}
+.section{max-width:1100px;margin:5rem auto;padding:0 1.2rem}
+h2{border-bottom:3px solid var(--accent);display:inline-block;margin-bottom:2rem;color:#fff}
 
-  .project-card,.cert-card{
-    background:var(--card-bg);border-radius:12px;padding:1.2rem;text-align:center;
-    box-shadow:0 2px 6px rgba(0,0,0,0.15);cursor:pointer;transition:.3s;color:#222
-  }
-  [data-theme="dark"] .project-card,[data-theme="dark"] .cert-card{color:var(--text);}
-  .project-card img,.cert-card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
-  .projects-grid,.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.project-card,.cert-card{
+  background:var(--card-bg);border-radius:12px;padding:1.2rem;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);cursor:pointer;transition:.3s;color:#222
+}
+[data-theme="dark"] .project-card,[data-theme="dark"] .cert-card{color:var(--text);}
+.project-card img,.cert-card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
+.projects-grid,.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
 
-  #contact{
-    background:var(--contact-bg);border-radius:12px;padding:2rem;text-align:center;color:var(--text)
-  }
-  #contact a{color:var(--accent);font-weight:600;text-decoration:none}
+#contact{
+  background:var(--contact-bg);border-radius:12px;padding:2rem;text-align:center;color:var(--text)
+}
+#contact a{color:var(--accent);font-weight:600;text-decoration:none}
 
-  /* 🔥 New fancy footer */
-  footer{
-    margin-top:4rem;text-align:center;padding:3rem 1rem;
-    background:linear-gradient(135deg,#0d6efd,#845ef7,#3bc9db);
-    background-size:300% 300%;animation:footerGradient 12s ease infinite;
-    color:#fff;position:relative;overflow:hidden;
-  }
-  @keyframes footerGradient {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  footer .socials{
-    margin-top:1rem;display:flex;justify-content:center;gap:1.5rem
-  }
-  footer .socials a{
-    color:#fff;font-size:1.4rem;transition:0.3s
-  }
-  footer .socials a:hover{transform:scale(1.2);color:#ffe066}
+/* 🌈 New Stylish Footer */
+footer{
+  margin-top:4rem;text-align:center;padding:3rem 1rem;
+  background:linear-gradient(135deg,#0d6efd,#845ef7,#3bc9db);
+  background-size:300% 300%;animation:footerBG 12s ease infinite;
+  color:#fff;position:relative;overflow:hidden;
+}
+@keyframes footerBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+footer p{font-size:1.1rem;font-weight:500;margin-bottom:1rem}
+footer .socials{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem}
+footer .socials a{color:#fff;font-size:1.4rem;transition:0.3s;text-decoration:none}
+footer .socials a:hover{transform:scale(1.2);color:#ffe066}
 
-  /* Modal */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
-  .modal.active{display:flex}
-  .modal-content{background:var(--card-bg);padding:2rem;border-radius:14px;max-width:600px;width:90%;color:var(--text);position:relative}
-  .modal-content img{width:100%;height:300px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
-  .close-btn{position:absolute;top:.8rem;right:1rem;font-size:1.6rem;background:none;border:none;color:var(--text);cursor:pointer}
-  .nav-btn{position:absolute;top:45%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:#fff;border:none;padding:.5rem .8rem;border-radius:50%;font-size:1.2rem;cursor:pointer}
-  .prev-btn{left:-2rem}.next-btn{right:-2rem}
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
+.modal.active{display:flex}
+.modal-content{background:var(--card-bg);padding:2rem;border-radius:14px;max-width:600px;width:90%;color:var(--text);position:relative}
+.modal-content img{width:100%;height:300px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
+.close-btn{position:absolute;top:.8rem;right:1rem;font-size:1.6rem;background:none;border:none;color:var(--text);cursor:pointer}
+.nav-btn{position:absolute;top:45%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:#fff;border:none;padding:.5rem .8rem;border-radius:50%;font-size:1.2rem;cursor:pointer}
+.prev-btn{left:-2rem}.next-btn{right:-2rem}
 </style>
 </head>
 <body>
@@ -113,7 +110,7 @@
 <header>
   <h1>Elias Irungu Kariuki</h1>
   <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
-  <!-- ✅ Fixed: smooth scroll works now -->
+  <!-- ✅ smooth scroll link -->
   <a href="#projects" class="cta-btn" id="seeWorkBtn">See My Work</a>
 </header>
 
@@ -149,7 +146,6 @@
   </div>
 </footer>
 
-<!-- Modal -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <button class="close-btn">&times;</button>
@@ -201,4 +197,5 @@ modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('
 
 </body>
 </html>
+
 
