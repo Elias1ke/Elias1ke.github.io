@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Elias Kariuki | Senior Data Analyst</title>
-  <meta name="description" content="Senior Data Analyst portfolio of Elias Kariuki — showcasing data projects, dashboards, and analytics experience.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -58,7 +57,6 @@
     }
     nav a:hover::after { width: 100%; }
 
-    /* HAMBURGER */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger div { width: 25px; height: 3px; background: var(--text); transition: var(--transition); }
 
@@ -87,13 +85,9 @@
     }
     .cta-btn:hover { background:#f1f1f1; transform: translateY(-3px); }
 
-    /* theme toggle repositioned */
     #theme-toggle {
-      position: fixed; 
-      top: 4.5rem;   
-      right: 1rem;
-      background: var(--card-bg); 
-      color: var(--accent);
+      position: fixed; top: 4.5rem; right: 1rem;
+      background: var(--card-bg); color: var(--accent);
       border: none; border-radius: 20px;
       padding: .5rem 1rem; cursor: pointer;
       font-weight: 600; z-index: 900;
@@ -101,7 +95,6 @@
       transition: background var(--transition), color var(--transition);
     }
 
-    /* SECTIONS */
     .section {
       max-width: 1000px; margin: 5rem auto; padding: 0 1.2rem;
     }
@@ -127,8 +120,7 @@
 
     /* PROJECTS */
     .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
       gap: 2rem;
     }
     .project-card {
@@ -139,36 +131,21 @@
       display: flex; flex-direction: column;
       transition: transform var(--transition), box-shadow var(--transition);
       opacity: 0; transform: translateY(40px);
+      cursor: pointer;
     }
-    .project-card.visible {
-      opacity: 1; transform: translateY(0);
-    }
+    .project-card.visible { opacity: 1; transform: translateY(0); }
     .project-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
-    .project-card img {
-      width: 100%;
-      display: block;
-      height: 180px;
-      object-fit: cover;
-    }
+    .project-card img { width: 100%; height: 180px; object-fit: cover; }
+
     .project-card h3 {
-      margin: 1rem 1rem 0.3rem;
-      color: var(--accent);
+      margin: 1rem 1rem 0.3rem; color: var(--accent);
     }
     .project-card p {
-      margin: 0 1rem 1rem;
-      flex-grow: 1;
-    }
-    .project-link {
       margin: 0 1rem 1.2rem;
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--accent);
-      transition: color .3s;
     }
-    .project-link:hover { color: #845ef7; }
 
     /* EXPERIENCE */
     .exp-card {
@@ -187,7 +164,40 @@
       background: var(--accent); color: #fff; margin-top: 5rem;
     }
 
-    /* MOBILE */
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .modal.active { display: flex; animation: fadeIn .3s; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .modal-content {
+      background: var(--card-bg);
+      border-radius: 14px;
+      max-width: 700px;
+      width: 90%;
+      padding: 2rem;
+      color: var(--text);
+      position: relative;
+      animation: slideUp .4s;
+    }
+    @keyframes slideUp { from{transform:translateY(40px); opacity:0;} to{transform:translateY(0);opacity:1;} }
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .close-btn {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; color: var(--text);
+      font-size: 1.5rem; cursor: pointer;
+    }
+
     @media (max-width: 768px) {
       nav ul {
         display: none; position: absolute; top: 60px; right: 0;
@@ -239,23 +249,15 @@
     <section id="projects" class="section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card">
-          <img src="https://via.placeholder.com/600x350" alt="Customer Churn Dashboard">
+        <div class="project-card" data-title="Customer Churn Dashboard" data-tools="Power BI, SQL" data-desc="Interactive dashboard tracking churn and retention KPIs." data-img="https://via.placeholder.com/700x400">
+          <img src="https://via.placeholder.com/600x350">
           <h3>Customer Churn Dashboard</h3>
           <p>Interactive Power BI dashboard tracking churn and retention KPIs across regions.</p>
-          <a href="#" target="_blank" class="project-link">🔗 View Project</a>
         </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/600x350" alt="Sales Forecasting Model">
+        <div class="project-card" data-title="Sales Forecasting Model" data-tools="Python, XGBoost, ARIMA" data-desc="Improved forecast accuracy by 18% using advanced time-series modeling." data-img="https://via.placeholder.com/700x400">
+          <img src="https://via.placeholder.com/600x350">
           <h3>Sales Forecasting Model</h3>
           <p>Python time-series model using ARIMA/XGBoost improving forecast accuracy by 18%.</p>
-          <a href="#" target="_blank" class="project-link">🔗 View Project</a>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/600x350" alt="Executive KPI Dashboard">
-          <h3>Executive KPI Dashboard</h3>
-          <p>Tableau executive dashboard automating financial reporting and KPI tracking.</p>
-          <a href="#" target="_blank" class="project-link">🔗 View Project</a>
         </div>
       </div>
     </section>
@@ -280,30 +282,61 @@
     </section>
   </main>
 
-  <footer>
-    © 2025 Elias Kariuki — Senior Data Analyst Portfolio
-  </footer>
+  <footer>© 2025 Elias Kariuki — Senior Data Analyst Portfolio</footer>
+
+  <!-- MODAL -->
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <img id="modalImg">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <p><strong>Tools:</strong> <span id="modalTools"></span></p>
+    </div>
+  </div>
 
   <script>
-    // Dark mode
     const toggle = document.getElementById('theme-toggle');
     toggle.addEventListener('click', () => {
       document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
       toggle.textContent = document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
 
-    // Hamburger menu
     const burger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('nav ul');
     burger.addEventListener('click', () => navMenu.classList.toggle('open'));
 
-    // Scroll animation
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('visible');
       });
     }, { threshold: 0.2 });
     document.querySelectorAll('.skill, .project-card, .exp-card').forEach(el => observer.observe(el));
+
+    // MODAL logic
+    const modal = document.getElementById('projectModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalTools = document.getElementById('modalTools');
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modalImg.src = card.dataset.img;
+        modalTitle.textContent = card.dataset.title;
+        modalDesc.textContent = card.dataset.desc;
+        modalTools.textContent = card.dataset.tools;
+        modal.classList.add('active');
+      });
+    });
+
+    document.querySelector('.close-btn').addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
   </script>
 
 </body>
