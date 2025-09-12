@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f8f9fa;
+      --bg: #f0f2f5;
       --text: #222;
       --card-bg: #ffffffee;
       --accent: #0d6efd;
@@ -34,12 +34,12 @@
     nav {
       position: fixed; top:0; left:0; width:100%;
       display:flex; justify-content:space-between; align-items:center;
-      padding:1rem 1.5rem; background:rgba(255,255,255,0.8);
+      padding:1rem 1.5rem; background:rgba(255,255,255,0.9);
       backdrop-filter: blur(10px);
-      box-shadow:0 2px 10px rgba(0,0,0,0.08);
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
       z-index:1000;
     }
-    [data-theme="dark"] nav {background:rgba(30,30,30,0.8);}
+    [data-theme="dark"] nav {background:rgba(30,30,30,0.9);}
     nav .logo {font-weight:700; font-size:1.3rem; color:var(--accent);}
     nav ul {display:flex; gap:1.5rem; margin:0; list-style:none; padding:0;}
     nav a {text-decoration:none; color:var(--text); position:relative; font-weight:500;}
@@ -59,6 +59,7 @@
     }
     @keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     header h1{font-size:3rem;margin:0;}
+    header p{font-size:1.2rem;opacity:0.95;}
     .cta-btn {
       display:inline-block; margin-top:2rem; background:#fff; color:var(--accent);
       padding:0.9rem 1.5rem; border-radius:30px; text-decoration:none; font-weight:600;
@@ -72,15 +73,16 @@
     }
 
     .section{max-width:1100px;margin:5rem auto;padding:0 1.2rem}
-    h2{border-bottom:3px solid var(--accent);display:inline-block;margin-bottom:2rem}
+    h2{border-bottom:3px solid var(--accent);display:inline-block;margin-bottom:2rem;color:#fff}
 
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem}
     .skill, .project-card, .exp-card, .cert-card {
       background:var(--card-bg); border-radius:12px; padding:1.2rem; text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.05); transition:.4s; cursor:pointer;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15); transition:.4s; cursor:pointer;
+      color: var(--text);
     }
     .project-card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
-    .project-card:hover,.cert-card:hover{transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,0.15)}
+    .project-card:hover,.cert-card:hover{transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,0.2)}
 
     .projects-grid, .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
     .exp-card{margin-bottom:2rem;text-align:left}
@@ -203,6 +205,7 @@
              data-title="Microsoft Certified: Data Analyst Associate"
              data-desc="Microsoft — Issued May 2024"
              data-images="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3,https://images.unsplash.com/photo-1584697964403-c43a5b3fa3ef">
+          <img src="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3" alt="">
           <h3>Microsoft Certified: Data Analyst Associate</h3>
           <p>Microsoft — Issued May 2024</p>
         </div>
@@ -210,6 +213,7 @@
              data-title="Google Data Analytics Professional"
              data-desc="Coursera — Issued Jan 2024"
              data-images="https://images.unsplash.com/photo-1605902711622-cfb43c44367c,https://images.unsplash.com/photo-1624996379727-73fc521a8251">
+          <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367c" alt="">
           <h3>Google Data Analytics Professional</h3>
           <p>Coursera — Issued Jan 2024</p>
         </div>
@@ -238,7 +242,7 @@
     </div>
   </div>
 
-  <script>
+<script>
   // Theme
   document.getElementById('theme-toggle').addEventListener('click', () => {
     document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -290,7 +294,7 @@
   document.querySelector('.close-btn').addEventListener('click',()=>modal.classList.remove('active'));
   modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('active')});
 
-  // 🔥 Keyboard navigation
+  // Keyboard navigation
   document.addEventListener('keydown', e => {
     if(!modal.classList.contains('active')) return;
     if(e.key === 'ArrowLeft') {
