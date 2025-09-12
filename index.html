@@ -20,6 +20,36 @@
       --card-bg: #1b1d23;
       --accent: #66b2ff;
     }
+    html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+* {
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+}
+
+img, video {
+  max-width: 100%; /* Prevent media from overflowing containers */
+  height: auto;
+  display: block;
+}
+
+nav ul {
+  flex-wrap: wrap; /* Avoid nav items overflowing on small screens */
+}
+
+.section {
+  width: 100%;
+  overflow: hidden; /* Contain floating/animated elements */
+}
+
+.modal-content {
+  max-height: 90vh; /* Prevent modal from overflowing vertically */
+  overflow-y: auto;
+}
+
 
     html { scroll-behavior: smooth; }
     body {
