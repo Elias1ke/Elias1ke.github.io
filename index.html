@@ -96,13 +96,31 @@
     .modal-content{
       background:var(--card-bg);padding:2rem;border-radius:14px;
       max-width:600px;width:90%;color:var(--text);position:relative;
-      animation:fadeUp .3s ease;
     }
-    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     .modal-content img{width:100%;border-radius:10px;margin-bottom:1rem;object-fit:cover;height:300px}
     .close-btn{
       position:absolute;top:.8rem;right:1rem;font-size:1.6rem;border:none;
       background:none;color:var(--text);cursor:pointer
+    }
+    .nav-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      padding: .5rem .8rem;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .prev-btn { left: -2rem; }
+    .next-btn { right: -2rem; }
+
+    @media(max-width:768px){
+      nav ul{display:none;flex-direction:column;position:absolute;top:60px;right:0;background:var(--card-bg);width:200px;padding:1rem;border-radius:8px}
+      nav ul.open{display:flex}
+      .hamburger{display:flex}
     }
   </style>
 </head>
@@ -146,12 +164,19 @@
     <section id="projects" class="section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card" data-title="Customer Churn Dashboard" data-desc="Interactive dashboard tracking churn KPIs." data-img="https://images.unsplash.com/photo-1581092580331-4f0c4a53f101">
+        <div class="project-card"
+             data-title="Customer Churn Dashboard"
+             data-desc="Interactive dashboard tracking churn KPIs."
+             data-images="https://images.unsplash.com/photo-1581092580331-4f0c4a53f101,https://images.unsplash.com/photo-1581091012184-7c55f37c03b3,https://images.unsplash.com/photo-1581090907760-bdbea05c6712">
           <img src="https://images.unsplash.com/photo-1581092580331-4f0c4a53f101" alt="">
           <h3>Customer Churn Dashboard</h3>
           <p>Power BI dashboard tracking churn KPIs.</p>
         </div>
-        <div class="project-card" data-title="Sales Forecasting Model" data-desc="Improved forecast accuracy by 18%." data-img="https://images.unsplash.com/photo-1501504905252-473c47e087f8">
+
+        <div class="project-card"
+             data-title="Sales Forecasting Model"
+             data-desc="Improved forecast accuracy by 18%."
+             data-images="https://images.unsplash.com/photo-1501504905252-473c47e087f8,https://images.unsplash.com/photo-1542744173-8e7e53415bb0">
           <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8" alt="">
           <h3>Sales Forecasting Model</h3>
           <p>Python model improving forecast accuracy by 18%.</p>
@@ -174,11 +199,17 @@
     <section id="certifications" class="section">
       <h2>Certifications</h2>
       <div class="cert-grid">
-        <div class="cert-card" data-title="Microsoft Certified: Data Analyst Associate" data-desc="Microsoft — Issued May 2024" data-img="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3">
+        <div class="cert-card"
+             data-title="Microsoft Certified: Data Analyst Associate"
+             data-desc="Microsoft — Issued May 2024"
+             data-images="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3,https://images.unsplash.com/photo-1584697964403-c43a5b3fa3ef">
           <h3>Microsoft Certified: Data Analyst Associate</h3>
           <p>Microsoft — Issued May 2024</p>
         </div>
-        <div class="cert-card" data-title="Google Data Analytics Professional" data-desc="Coursera — Issued Jan 2024" data-img="https://images.unsplash.com/photo-1605902711622-cfb43c44367c">
+        <div class="cert-card"
+             data-title="Google Data Analytics Professional"
+             data-desc="Coursera — Issued Jan 2024"
+             data-images="https://images.unsplash.com/photo-1605902711622-cfb43c44367c,https://images.unsplash.com/photo-1624996379727-73fc521a8251">
           <h3>Google Data Analytics Professional</h3>
           <p>Coursera — Issued Jan 2024</p>
         </div>
@@ -199,6 +230,8 @@
   <div class="modal" id="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
+      <button class="nav-btn prev-btn">&#10094;</button>
+      <button class="nav-btn next-btn">&#10095;</button>
       <img id="modalImg">
       <h2 id="modalTitle"></h2>
       <p id="modalDesc"></p>
@@ -206,31 +239,52 @@
   </div>
 
   <script>
-    // Dark mode toggle
+    // Theme
     document.getElementById('theme-toggle').addEventListener('click', () => {
       document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
       document.getElementById('theme-toggle').textContent =
         document.body.dataset.theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
-
-    // Hamburger nav toggle
+    // Hamburger
     document.querySelector('.hamburger').addEventListener('click', () => {
       document.querySelector('nav ul').classList.toggle('open');
     });
 
-    // Modal logic for all cards
+    // Modal logic
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let galleryImages = [];
+    let currentIndex = 0;
+
+    function showImage(index) {
+      modalImg.src = galleryImages[index];
+    }
 
     document.querySelectorAll('.project-card,.cert-card').forEach(card=>{
       card.addEventListener('click',()=>{
-        modalImg.src = card.dataset.img;
+        galleryImages = card.dataset.images.split(',');
+        currentIndex = 0;
+        showImage(currentIndex);
         modalTitle.textContent = card.dataset.title;
         modalDesc.textContent = card.dataset.desc;
         modal.classList.add('active');
       });
+    });
+
+    prevBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showImage(currentIndex);
+    });
+    nextBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showImage(currentIndex);
     });
 
     document.querySelector('.close-btn').addEventListener('click',()=>modal.classList.remove('active'));
