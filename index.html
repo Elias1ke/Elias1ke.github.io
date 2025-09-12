@@ -28,7 +28,23 @@
       background: var(--bg);
       color: var(--text);
       transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
     }
+
+    /* Animated background shapes */
+    body::before, body::after {
+      content:"";
+      position:fixed;
+      width:600px; height:600px;
+      border-radius:50%;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity:0.08;
+      animation: float 15s ease-in-out infinite alternate;
+      z-index:-1;
+    }
+    body::before { top:-200px; left:-200px; }
+    body::after { bottom:-200px; right:-200px; animation-delay:7s; }
+    @keyframes float { from{transform:translateY(0);} to{transform:translateY(50px);} }
 
     /* NAVIGATION */
     nav {
@@ -63,15 +79,15 @@
     /* HEADER */
     header {
       text-align: center;
-      padding: 8rem 1rem 5rem;
-      background: linear-gradient(120deg,var(--accent),#845ef7);
+      padding: 9rem 1rem 6rem;
+      background: linear-gradient(-45deg, var(--accent), #845ef7, #3bc9db, #ff922b);
+      background-size: 300% 300%;
       color: #fff; position: relative; overflow: hidden;
+      animation: gradientBG 10s ease infinite;
     }
-    header::after {
-      content:""; position:absolute; inset:0; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
-      animation: floatBg 10s infinite alternate ease-in-out;
+    @keyframes gradientBG {
+      0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
     }
-    @keyframes floatBg { from {transform: translateY(0);} to {transform: translateY(-30px);} }
     header h1 { margin: 0; font-size: 3rem; letter-spacing: -1px; animation: fadeDown 1s ease-out forwards; opacity:0; }
     header p { margin-top: .8rem; font-size: 1.2rem; animation: fadeUp 1s 0.3s ease-out forwards; opacity:0; }
     @keyframes fadeDown { from{opacity:0; transform: translateY(-30px);} to{opacity:1; transform: translateY(0);} }
@@ -86,7 +102,7 @@
     .cta-btn:hover { background:#f1f1f1; transform: translateY(-3px); }
 
     #theme-toggle {
-      position: fixed; top: 4.5rem; right: 1rem;
+      position: fixed; top: 4.8rem; right: 1rem;
       background: var(--card-bg); color: var(--accent);
       border: none; border-radius: 20px;
       padding: .5rem 1rem; cursor: pointer;
@@ -96,7 +112,7 @@
     }
 
     .section {
-      max-width: 1000px; margin: 5rem auto; padding: 0 1.2rem;
+      max-width: 1100px; margin: 5rem auto; padding: 0 1.2rem;
     }
     h2 {
       border-bottom: 3px solid var(--accent);
@@ -138,14 +154,10 @@
       transform: translateY(-5px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
-    .project-card img { width: 100%; height: 180px; object-fit: cover; }
+    .project-card img { width: 100%; height: 200px; object-fit: cover; }
 
-    .project-card h3 {
-      margin: 1rem 1rem 0.3rem; color: var(--accent);
-    }
-    .project-card p {
-      margin: 0 1rem 1.2rem;
-    }
+    .project-card h3 { margin: 1rem 1rem 0.3rem; color: var(--accent); }
+    .project-card p { margin: 0 1rem 1.2rem; }
 
     /* EXPERIENCE */
     .exp-card {
@@ -166,36 +178,30 @@
 
     /* MODAL */
     .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      display: none; justify-content: center; align-items: center; z-index: 2000;
     }
     .modal.active { display: flex; animation: fadeIn .3s; }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     .modal-content {
-      background: var(--card-bg);
-      border-radius: 14px;
-      max-width: 700px;
-      width: 90%;
-      padding: 2rem;
-      color: var(--text);
-      position: relative;
-      animation: slideUp .4s;
+      background: var(--card-bg); border-radius: 14px;
+      max-width: 800px; width: 90%; padding: 2rem;
+      color: var(--text); position: relative; animation: slideUp .4s;
     }
     @keyframes slideUp { from{transform:translateY(40px); opacity:0;} to{transform:translateY(0);opacity:1;} }
     .modal-content img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
+      width: 100%; border-radius: 10px; margin-bottom: 1rem; height: 380px; object-fit: cover;
     }
     .close-btn {
       position: absolute; top: 1rem; right: 1rem;
       background: none; border: none; color: var(--text);
       font-size: 1.5rem; cursor: pointer;
+    }
+    .gallery-nav {
+      display: flex; justify-content: space-between; margin-top: .5rem;
+    }
+    .gallery-nav button {
+      background: var(--accent); color:#fff; border:none; padding:.4rem .8rem; border-radius:5px; cursor:pointer;
     }
 
     @media (max-width: 768px) {
@@ -228,7 +234,7 @@
   <header>
     <h1>Elias Irungu Kariuki</h1>
     <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
-    <a href="#projects" id="see-work-btn" class="cta-btn" role="button">See My Work</a>
+    <a href="#projects" class="cta-btn">See My Work</a>
   </header>
 
   <main>
@@ -249,15 +255,23 @@
     <section id="projects" class="section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card" data-title="Customer Churn Dashboard" data-tools="Power BI, SQL" data-desc="Interactive dashboard tracking churn and retention KPIs." data-img="https://via.placeholder.com/700x400">
-          <img src="https://via.placeholder.com/600x350">
+        <div class="project-card" 
+          data-title="Customer Churn Dashboard" 
+          data-tools="Power BI, SQL" 
+          data-desc="Interactive dashboard tracking churn and retention KPIs." 
+          data-images="https://images.unsplash.com/photo-1581092580331-4f0c4a53f101,https://images.unsplash.com/photo-1556761175-4b46a572b786">
+          <img src="https://images.unsplash.com/photo-1581092580331-4f0c4a53f101">
           <h3>Customer Churn Dashboard</h3>
-          <p>Interactive Power BI dashboard tracking churn and retention KPIs across regions.</p>
+          <p>Power BI dashboard tracking churn KPIs.</p>
         </div>
-        <div class="project-card" data-title="Sales Forecasting Model" data-tools="Python, XGBoost, ARIMA" data-desc="Improved forecast accuracy by 18% using advanced time-series modeling." data-img="https://via.placeholder.com/700x400">
-          <img src="https://via.placeholder.com/600x350">
+        <div class="project-card" 
+          data-title="Sales Forecasting Model" 
+          data-tools="Python, XGBoost, ARIMA" 
+          data-desc="Improved forecast accuracy by 18% using advanced time-series modeling." 
+          data-images="https://images.unsplash.com/photo-1501504905252-473c47e087f8,https://images.unsplash.com/photo-1549924231-f129b911e442">
+          <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8">
           <h3>Sales Forecasting Model</h3>
-          <p>Python time-series model using ARIMA/XGBoost improving forecast accuracy by 18%.</p>
+          <p>Python time-series model improving forecast accuracy by 18%.</p>
         </div>
       </div>
     </section>
@@ -289,6 +303,10 @@
     <div class="modal-content">
       <button class="close-btn">&times;</button>
       <img id="modalImg">
+      <div class="gallery-nav">
+        <button id="prevImg">⟨ Prev</button>
+        <button id="nextImg">Next ⟩</button>
+      </div>
       <h2 id="modalTitle"></h2>
       <p id="modalDesc"></p>
       <p><strong>Tools:</strong> <span id="modalTools"></span></p>
@@ -307,22 +325,24 @@
     burger.addEventListener('click', () => navMenu.classList.toggle('open'));
 
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.2 });
     document.querySelectorAll('.skill, .project-card, .exp-card').forEach(el => observer.observe(el));
 
-    // MODAL logic
+    // MODAL logic with gallery
     const modal = document.getElementById('projectModal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
     const modalTools = document.getElementById('modalTools');
+    let currentIndex = 0;
+    let currentImages = [];
 
     document.querySelectorAll('.project-card').forEach(card => {
       card.addEventListener('click', () => {
-        modalImg.src = card.dataset.img;
+        currentImages = card.dataset.images.split(',');
+        currentIndex = 0;
+        modalImg.src = currentImages[currentIndex];
         modalTitle.textContent = card.dataset.title;
         modalDesc.textContent = card.dataset.desc;
         modalTools.textContent = card.dataset.tools;
@@ -330,14 +350,17 @@
       });
     });
 
-    document.querySelector('.close-btn').addEventListener('click', () => {
-      modal.classList.remove('active');
+    document.getElementById('prevImg').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      modalImg.src = currentImages[currentIndex];
     });
-
-    modal.addEventListener('click', e => {
-      if (e.target === modal) modal.classList.remove('active');
+    document.getElementById('nextImg').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      modalImg.src = currentImages[currentIndex];
     });
+    document.querySelector('.close-btn').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', e => { if(e.target === modal) modal.classList.remove('active'); });
   </script>
-
 </body>
 </html>
+
