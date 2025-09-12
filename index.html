@@ -37,18 +37,56 @@
   nav .logo{font-weight:700;font-size:1.3rem;color:var(--accent);}
   nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;}
   nav a{text-decoration:none;color:var(--text);font-weight:500;}
-  header{text-align:center;padding:9rem 1rem 6rem;background:linear-gradient(-45deg,var(--accent),#845ef7,#3bc9db,#ff922b);background-size:300% 300%;color:#fff;animation:gradientBG 10s ease infinite}
+
+  header{
+    text-align:center;padding:9rem 1rem 6rem;
+    background:linear-gradient(-45deg,var(--accent),#845ef7,#3bc9db,#ff922b);
+    background-size:300% 300%;color:#fff;animation:gradientBG 10s ease infinite
+  }
   @keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  .cta-btn{display:inline-block;margin-top:2rem;background:#fff;color:var(--accent);padding:0.9rem 1.5rem;border-radius:30px;text-decoration:none;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+  .cta-btn{
+    display:inline-block;margin-top:2rem;background:#fff;color:var(--accent);
+    padding:0.9rem 1.5rem;border-radius:30px;text-decoration:none;font-weight:600;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:0.3s;
+  }
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,0.2)}
+
   .section{max-width:1100px;margin:5rem auto;padding:0 1.2rem}
   h2{border-bottom:3px solid var(--accent);display:inline-block;margin-bottom:2rem;color:#fff}
-  .project-card,.cert-card{background:var(--card-bg);border-radius:12px;padding:1.2rem;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.15);cursor:pointer;transition:.3s;color:#222}
+
+  .project-card,.cert-card{
+    background:var(--card-bg);border-radius:12px;padding:1.2rem;text-align:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);cursor:pointer;transition:.3s;color:#222
+  }
   [data-theme="dark"] .project-card,[data-theme="dark"] .cert-card{color:var(--text);}
   .project-card img,.cert-card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:1rem}
   .projects-grid,.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
-  #contact{background:var(--contact-bg);border-radius:12px;padding:2rem;text-align:center;color:var(--text)}
+
+  #contact{
+    background:var(--contact-bg);border-radius:12px;padding:2rem;text-align:center;color:var(--text)
+  }
   #contact a{color:var(--accent);font-weight:600;text-decoration:none}
-  footer{text-align:center;padding:2rem;background:var(--accent);color:#fff;margin-top:4rem}
+
+  /* 🔥 New fancy footer */
+  footer{
+    margin-top:4rem;text-align:center;padding:3rem 1rem;
+    background:linear-gradient(135deg,#0d6efd,#845ef7,#3bc9db);
+    background-size:300% 300%;animation:footerGradient 12s ease infinite;
+    color:#fff;position:relative;overflow:hidden;
+  }
+  @keyframes footerGradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  footer .socials{
+    margin-top:1rem;display:flex;justify-content:center;gap:1.5rem
+  }
+  footer .socials a{
+    color:#fff;font-size:1.4rem;transition:0.3s
+  }
+  footer .socials a:hover{transform:scale(1.2);color:#ffe066}
+
   /* Modal */
   .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
   .modal.active{display:flex}
@@ -75,7 +113,8 @@
 <header>
   <h1>Elias Irungu Kariuki</h1>
   <p>Senior Data Analyst • SQL | Python | Power BI | Tableau | Excel</p>
-  <a href="#projects" class="cta-btn">See My Work</a>
+  <!-- ✅ Fixed: smooth scroll works now -->
+  <a href="#projects" class="cta-btn" id="seeWorkBtn">See My Work</a>
 </header>
 
 <main>
@@ -93,20 +132,6 @@
   </div>
 </section>
 
-<section id="certifications" class="section">
-  <h2>Certifications</h2>
-  <div class="cert-grid">
-    <div class="cert-card" data-title="Microsoft Certified: Data Analyst Associate" data-desc="Microsoft — Issued May 2024" data-images="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3">
-      <img src="https://images.unsplash.com/photo-1596496059940-3e1d1cc3c4f3" alt="">
-      <h3>Microsoft Certified: Data Analyst Associate</h3><p>Microsoft — Issued May 2024</p>
-    </div>
-    <div class="cert-card" data-title="Google Data Analytics Professional" data-desc="Coursera — Issued Jan 2024" data-images="https://images.unsplash.com/photo-1605902711622-cfb43c44367c">
-      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367c" alt="">
-      <h3>Google Data Analytics Professional</h3><p>Coursera — Issued Jan 2024</p>
-    </div>
-  </div>
-</section>
-
 <section id="contact" class="section">
   <h2>Contact</h2>
   <p>Email: <a href="mailto:eliasirungu001@gmail.com">eliasirungu001@gmail.com</a></p>
@@ -115,8 +140,16 @@
 </section>
 </main>
 
-<footer>© 2025 Elias Kariuki — Senior Data Analyst Portfolio</footer>
+<footer>
+  <p>© 2025 Elias Kariuki — Senior Data Analyst Portfolio</p>
+  <div class="socials">
+    <a href="#" title="LinkedIn">🌐</a>
+    <a href="#" title="GitHub">💻</a>
+    <a href="#" title="Email">📧</a>
+  </div>
+</footer>
 
+<!-- Modal -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <button class="close-btn">&times;</button>
@@ -168,3 +201,4 @@ modal.addEventListener('click',e=>{if(e.target===modal) modal.classList.remove('
 
 </body>
 </html>
+
