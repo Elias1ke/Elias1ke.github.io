@@ -8,17 +8,19 @@
 
   <style>
     :root {
-      --bg: #f8f9fa;
-      --text: #222;
-      --card-bg: #fff;
-      --accent: #0d6efd;
-      --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    [data-theme="dark"] {
-      --bg: #0f1116;
-      --text: #f1f1f1;
-      --card-bg: #1b1d23;
-      --accent: #66b2ff;
+  --bg: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+  --text: #e8eef2;
+  --card-bg: rgba(255,255,255,0.05);
+  --accent: #4dd0e1; /* bright teal, fits analytics theme */
+  --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg: linear-gradient(120deg, #0a0c10, #1b1d23, #0f1116);
+  --text: #f1f1f1;
+  --card-bg: rgba(255,255,255,0.06);
+  --accent: #66b2ff;
+}
+
     }
     html, body {
   width: 100%;
@@ -53,13 +55,22 @@ nav ul {
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      transition: background var(--transition), color var(--transition);
-      overflow-x: hidden;
-    }
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: var(--bg);
+  background-size: 400% 400%;
+  animation: gradientShift 25s ease infinite;
+  color: var(--text);
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
     /* Animated background shapes */
     body::before, body::after {
