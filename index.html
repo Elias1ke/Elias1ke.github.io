@@ -116,13 +116,14 @@ footer{text-align:center;padding:2rem;background:var(--accent);color:#fff;margin
   <div class="menu-toggle" id="menu-toggle">
     <span></span><span></span><span></span>
   </div>
-  <ul id="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <ul class="nav-links">
+  <li><a href="#about" data-scroll>About</a></li>
+  <li><a href="#skills" data-scroll>Skills</a></li>
+  <li><a href="#projects" data-scroll>Projects</a></li>
+  <li><a href="#contact" data-scroll>Contact</a></li>
+  <li><a href="#work" data-scroll class="see-work-btn">See Work</a></li>
+</ul>
+
 </nav>
 
 <header>
@@ -267,6 +268,33 @@ const menuToggle = document.getElementById('menu-toggle');
 const navLinks = document.getElementById('nav-links');
 menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
 </script>
+<script>
+  // Hamburger toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // Smooth scroll without adding to browser history
+  document.querySelectorAll('a[data-scroll]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 60, // adjust for navbar height
+          behavior: 'smooth'
+        });
+      }
+      // also close menu on mobile
+      navLinks.classList.remove('show');
+    });
+  });
+</script>
+
+
 
 </body>
 </html>
